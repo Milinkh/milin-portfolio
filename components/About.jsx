@@ -1,6 +1,7 @@
 'use client';
 
 import { Fragment, useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 import Plate from './Plate';
 import { useReveal } from '@/lib/useReveal';
 import { ABOUT } from '@/lib/content';
@@ -61,9 +62,13 @@ export default function About() {
         </div>
 
         <div className="portrait fade">
-          {/* Drop portrait.jpg in /public and swap this for:
-              <Image src="/portrait.jpg" alt="Milin Khunkhun" fill style={{objectFit:'cover'}} /> */}
-          <div className="ph">Portrait<br />4 : 5</div>
+          <Image
+            src="/portrait.jpg"
+            alt="Milin Khunkhun"
+            fill
+            sizes="(max-width:900px) 300px, 380px"
+            style={{ objectFit: 'cover' }}
+          />
         </div>
       </div>
 
