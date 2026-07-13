@@ -39,9 +39,26 @@ export default function Plate({ text }) {
     [text]
   );
 
-  return (
-    <span className="plate">
-      {chars.map(({ ch, i, dx, dy, r }) => (
+  /*
+   * Group characters into words so a line can only break at a real space, never
+   * mid-word. Each .ch is display:inline-block (needed for the transform), and
+   * adjacent inline-blocks would otherwise break between any two glyphs. Wrapping
+   * each word's glyphs in a nowrap .wg keeps words intact; a plain breakable space
+   * sits between words. Per-glyph animation (scatter + i*42ms stagger) is unchanged
+   * — the global index i still drives it, spaces just don't get an animated span.
+   */
+  const nodes = [];
+  let word = [];
+  const flush = i => {
+    if (word.length) nodes.push(<span className="wg" key={`w${i}`}>{word}</span>);
+    word = [];
+  };
+  chars.forEach(({ ch, i, dx, dy, r }) => {
+    if (ch === ' ') {
+      flush(i);
+      nodes.push(' ');            // breakable space between words
+    } else {
+      word.push(
         <span
           key={i}
           className="ch"
@@ -54,7 +71,10 @@ export default function Plate({ text }) {
         >
           {ch}
         </span>
-      ))}
-    </span>
-  );
+      );
+    }
+  });
+  flush('last');
+
+  return <span className="plate">{nodes}</span>;
 }
