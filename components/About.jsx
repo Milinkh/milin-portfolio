@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
 import Plate from './Plate';
 import { useReveal } from '@/lib/useReveal';
 import { ABOUT } from '@/lib/content';
@@ -48,9 +48,14 @@ export default function About() {
 
           <p className="prep">
             {ABOUT.skills.map((s, i) => (
-              <span className="it" key={s}>
-                {s}{i < ABOUT.skills.length - 1 && <i>·</i>}
-              </span>
+              <Fragment key={s}>
+                <span className="it">
+                  {s}{i < ABOUT.skills.length - 1 && <i>·</i>}
+                </span>
+                {/* zero-width break opportunity so the list wraps between items
+                    (the nowrap span keeps each "word·" unit intact) */}
+                {i < ABOUT.skills.length - 1 && <wbr />}
+              </Fragment>
             ))}
           </p>
         </div>
