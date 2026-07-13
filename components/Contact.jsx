@@ -14,6 +14,23 @@ export default function Contact() {
 
       <div className="rows fade">
         {CONTACT.rows.map(r => {
+          const label = (
+            <div>
+              <span className="k">{r.k}</span>
+              <span className="v">{r.v}</span>
+            </div>
+          );
+
+          /* rows without an href are display-only (e.g. phone): render a plain
+             div, no arrow — nothing to click. */
+          if (!r.href) {
+            return (
+              <div className="row" key={r.k}>
+                {label}
+              </div>
+            );
+          }
+
           const external = r.href.startsWith('http');
           return (
             <a
@@ -22,10 +39,7 @@ export default function Contact() {
               href={r.href}
               {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
             >
-              <div>
-                <span className="k">{r.k}</span>
-                <span className="v">{r.v}</span>
-              </div>
+              {label}
               <span className="arrow">→</span>
             </a>
           );
