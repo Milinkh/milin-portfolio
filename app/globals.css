@@ -179,7 +179,8 @@ section{
   transform-style:preserve-3d;
   transition:transform 1.5s cubic-bezier(.3,.85,.25,1);
 }
-.tile:hover .flipper{transform:rotateY(180deg)}
+/* Flip-to-description disabled for now — re-enable to bring the back face back.
+.tile:hover .flipper{transform:rotateY(180deg)} */
 
 .face{
   position:absolute;inset:0;
@@ -220,7 +221,8 @@ section{
 @media(max-width:820px){
   .tile{width:min(88vw,300px);height:340px}
   .tile:hover .flipper{transform:none}
-  .tile:active .flipper{transform:rotateY(180deg)}
+  /* Flip-to-description disabled for now — re-enable to bring the back face back.
+  .tile:active .flipper{transform:rotateY(180deg)} */
 }
 
 /* ===================== 3 · ABOUT ===================== */
