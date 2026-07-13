@@ -18,10 +18,23 @@ export default function TicketNav() {
     return () => io.disconnect();
   }, []);
 
+  /* Scroll to the section without writing the hash to the URL. preventDefault
+     stops the native anchor jump (which would append #id); we scroll manually.
+     href is kept so the links stay real, focusable, and open-in-new-tab works. */
+  const go = (e, id) => {
+    e.preventDefault();
+    document.getElementById(id)?.scrollIntoView();
+  };
+
   return (
     <nav id="ticket" aria-label="Sections">
       {NAV.map(({ id, n, label }) => (
-        <a key={id} href={`#${id}`} className={active === id ? 'on' : ''}>
+        <a
+          key={id}
+          href={`#${id}`}
+          className={active === id ? 'on' : ''}
+          onClick={e => go(e, id)}
+        >
           {n}&nbsp;&nbsp;{label}
         </a>
       ))}
