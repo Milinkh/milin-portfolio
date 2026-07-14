@@ -331,7 +331,9 @@ section{
 #about.cutting .cut:nth-child(2) .full{transition-delay:3.95s}
 
 @media(max-width:900px){
-  .cuts{flex-direction:column;align-items:center;gap:1.8rem}
+  /* clip the blade's sweep so it can't spill past the narrow viewport
+     (on desktop the wide side-padding absorbs it) */
+  .cuts{flex-direction:column;align-items:center;gap:1.8rem;overflow:hidden}
   .cut{min-width:0;width:305px;max-width:100%}   /* centered, fits narrow phones */
   .cut .half{font-size:30px}
   #about.cutting .blade{animation-duration:3.7s}   /* faster swipe (was 4.2s) */
