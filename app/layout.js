@@ -20,11 +20,11 @@ export const metadata = {
   metadataBase: new URL('https://milinkhunkhun.com'),
   // This title is what appears in the browser tab, in Google results, and as the
   // headline of the link preview card in Slack, LinkedIn, and iMessage.
-  title: 'Milin Khunkhun, MBA',
+  title: 'Milin Khunkhun',
   description:
     'Building new products from first idea to first release.',
   openGraph: {
-    title: 'Milin Khunkhun, MBA',
+    title: 'Milin Khunkhun',
     description: 'Building new products from first idea to first release.',
     url: 'https://milinkhunkhun.com',
     siteName: 'Milin Khunkhun',
@@ -32,7 +32,7 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Milin Khunkhun, MBA',
+    title: 'Milin Khunkhun',
     description: 'Building new products from first idea to first release.',
   },
 };
