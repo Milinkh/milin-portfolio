@@ -11,17 +11,25 @@ export default function About() {
   const secRef = useRef(null);
   const [cutting, setCutting] = useState(false);
 
-  /* The knife re-cuts every time the section comes back into view. */
+  /* On desktop the knife re-cuts every time the section re-enters view. When the
+     certs are stacked (<=900px) the taller section crosses the threshold
+     repeatedly, so there the knife cuts once and stays open. */
   useEffect(() => {
     const el = secRef.current;
     if (!el) return;
+    const stacked = window.matchMedia('(max-width: 900px)');
+    let hasCut = false;
     const io = new IntersectionObserver(([e]) => {
+      const once = stacked.matches;
       if (e.isIntersecting) {
+        if (once && hasCut) return;   // stacked: only the first entry cuts
+        hasCut = true;
         setCutting(false);
         requestAnimationFrame(() => requestAnimationFrame(() => setCutting(true)));
-      } else {
-        setCutting(false);
+      } else if (!once) {
+        setCutting(false);            // desktop: reset so it re-cuts on re-entry
       }
+      // stacked + already cut: leave it open, don't restart
     }, { threshold: 0.35 });
     io.observe(el);
     return () => io.disconnect();

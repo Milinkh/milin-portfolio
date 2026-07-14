@@ -331,9 +331,17 @@ section{
 #about.cutting .cut:nth-child(2) .full{transition-delay:3.95s}
 
 @media(max-width:900px){
-  .cuts{flex-direction:column;align-items:center;gap:2.4rem}
+  .cuts{flex-direction:column;align-items:center;gap:1.8rem}
   .cut{min-width:0;width:305px;max-width:100%}   /* centered, fits narrow phones */
   .cut .half{font-size:30px}
+  #about.cutting .blade{animation-duration:3.7s}   /* faster swipe (was 4.2s) */
+  /* Stacked vertically, one horizontal blade can't reach the certs in sequence
+     like it does across a row on desktop. Sync both so a single swipe parts
+     them open together, timed to the faster blade. */
+  #about.cutting .cut:nth-child(1) .half,
+  #about.cutting .cut:nth-child(2) .half{transition-delay:2.2s}
+  #about.cutting .cut:nth-child(1) .full,
+  #about.cutting .cut:nth-child(2) .full{transition-delay:2.6s}
 }
 
 /* ===================== 4 · A FEW THINGS — scroll-morphed ===================== */
